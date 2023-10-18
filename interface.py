@@ -9,6 +9,11 @@ clear_btn.pack()
 exponentiation_btn = Button(window, text="E^x")
 exponentiation_btn()
 
+add_btn = Button(window, text="+")
+add_btn()
+
+subtract_btn = Button(window, text="-")
+subtract_btn()
 
 display = Entry(window,justify=RIGHT)
 
