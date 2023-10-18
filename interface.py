@@ -15,6 +15,12 @@ add_btn()
 subtract_btn = Button(window, text="-")
 subtract_btn()
 
+multiply_btn = Button(window, text="*")
+multiply_btn()
+
+divide_btn = Button(window, text="/")
+divide_btn()
+
 display = Entry(window,justify=RIGHT)
 
 display.pack(side=TOP, expand=YES, fill=BOTH)
