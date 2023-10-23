@@ -51,8 +51,8 @@ def display_results(a, b):
     print(f"Exponentiation: {exponentiation(a, b)}")
     print(f"Modulus: {modulus(a, b)}")
 
-def clear_screen():
-    print("0")
+def numbers():
+    input(float)
 if __name__ == "__main__":
     a, b = get_user_input()
     display_results(a, b)

@@ -51,6 +51,9 @@ eight_btn()
 nine_btn = Button(window, text="9")
 nine_btn()
 
+equal_btn = Button(window, text="=")
+equal_btn()
+
 display = Entry(window,justify=RIGHT)
 
 display.pack(side=TOP, expand=YES, fill=BOTH)
