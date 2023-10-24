@@ -1,61 +1,64 @@
 from tkinter import *
+from tkinter import PhotoImage
+
+icon = PhotoImage(file="icon.png")
+
+
+def btn_click(number):
+    current = str(display.get())
+    display.delete(0, END)
+    display.insert(0, current + str(number))
+
+def btn_clear():
+    display.delete(0, END)
+
+def btn_equal():
+    expression = display.get()
+    try:
+        result = eval(expression)
+        display.delete(0, END)
+        display.insert(0, result)
+    except Exception as e:
+        display.delete(0, END)
+        display.insert(0, "Error")
 
 window = Tk()
 window.title("Calculator")
-#Buttons
-clear_btn = Button(window, text="Clear")
-clear_btn.pack()
 
-exponentiation_btn = Button(window, text="E^x")
-exponentiation_btn()
+# Buttons for numbers 0-9
+for i in range(10):
+    btn = Button(window, text=str(i), command=lambda i=i: btn_click(i))
+    btn.grid(row=i//3+1, column=i%3)
 
-add_btn = Button(window, text="+")
-add_btn()
+# Define other buttons
+add_btn = Button(window, text="+", command=lambda: btn_click('+'))
+add_btn.grid(row=1, column=3)
 
-subtract_btn = Button(window, text="-")
-subtract_btn()
+subtract_btn = Button(window, text="-", command=lambda: btn_click('-'))
+subtract_btn.grid(row=2, column=3)
 
-multiply_btn = Button(window, text="*")
-multiply_btn()
+multiply_btn = Button(window, text="*", command=lambda: btn_click('*'))
+multiply_btn.grid(row=3, column=3)
 
-divide_btn = Button(window, text="/")
-divide_btn()
+divide_btn = Button(window, text="/", command=lambda: btn_click('/'))
+divide_btn.grid(row=4, column=3)
 
-zero_btn = Button(window, text="0")
-zero_btn()
+equal_btn = Button(window, text="=", command=btn_equal)
+equal_btn.grid(row=4, column=2)
 
-one_btn = Button(window, text="1")
-one_btn()
+exponentiation_btn = Button(window, text="E^x", command=lambda: btn_click('**'))
+exponentiation_btn.grid(row=4, column=1)
 
-two_btn = Button(window, text="2")
-two_btn()
+modulus_btn = Button(window, text="%", command=lambda: btn_click('%'))
+modulus_btn.grid(row=5, column=1)
 
-three_btn = Button(window, text="3")
-three_btn()
+clear_btn = Button(window, text="C", command=btn_clear)
+clear_btn.grid(row=5, column=2)
 
-four_btn = Button(window, text="4")
-four_btn()
+# Display
+display = Entry(window, justify=RIGHT)
+display.grid(row=0, column=0, columnspan=4)
 
-five_btn = Button(window, text="5")
-five_btn()
+window.iconphoto(True, icon)
+window.mainloop()
 
-six_btn = Button(window, text="6")
-six_btn()
-
-seven_btn = Button(window, text="7")
-seven_btn()
-
-eight_btn = Button(window, text="8")
-eight_btn()
-
-nine_btn = Button(window, text="9")
-nine_btn()
-
-equal_btn = Button(window, text="=")
-equal_btn()
-
-display = Entry(window,justify=RIGHT)
-
-display.pack(side=TOP, expand=YES, fill=BOTH)
-
-window.mainloop

@@ -1,4 +1,3 @@
-
 def add(a,b):
     result = a + b
     return result
@@ -29,7 +28,6 @@ def modulus(a, b):
     else:
         return "Error: Both numbers should be positive for modulus operation"
 
-
 def get_number(prompt):
     while True:
         try:
@@ -51,8 +49,6 @@ def display_results(a, b):
     print(f"Exponentiation: {exponentiation(a, b)}")
     print(f"Modulus: {modulus(a, b)}")
 
-def numbers():
-    input(float)
 if __name__ == "__main__":
     a, b = get_user_input()
     display_results(a, b)
