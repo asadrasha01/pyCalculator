@@ -1,8 +1,22 @@
 from tkinter import *
 from tkinter import PhotoImage
+import subprocess
 
-icon = PhotoImage(file="icon.png")
+applescript = """
+tell application "Finder"
+    set myApp to POSIX file "<full_path_to_your_script>"
+    set myIcon to POSIX file "<full_path_to_your_icns_icon>"
 
+    set myAlias to myApp as alias
+    set myIconAlias to myIcon as alias
+
+    set icon of myAlias to myIconAlias
+end tell
+"""
+
+subprocess.run(['osascript', '-e', applescript])
+window = Tk()
+window.title("Calculator")
 
 def btn_click(number):
     current = str(display.get())
@@ -22,15 +36,10 @@ def btn_equal():
         display.delete(0, END)
         display.insert(0, "Error")
 
-window = Tk()
-window.title("Calculator")
-
-# Buttons for numbers 0-9
 for i in range(10):
     btn = Button(window, text=str(i), command=lambda i=i: btn_click(i))
     btn.grid(row=i//3+1, column=i%3)
 
-# Define other buttons
 add_btn = Button(window, text="+", command=lambda: btn_click('+'))
 add_btn.grid(row=1, column=3)
 
@@ -55,10 +64,10 @@ modulus_btn.grid(row=5, column=1)
 clear_btn = Button(window, text="C", command=btn_clear)
 clear_btn.grid(row=5, column=2)
 
-# Display
 display = Entry(window, justify=RIGHT)
 display.grid(row=0, column=0, columnspan=4)
 
-window.iconphoto(True, icon)
+window.iconbitmap(default='image.icns')
+
 window.mainloop()
 
