@@ -1,20 +1,6 @@
 from tkinter import *
-from tkinter import PhotoImage
 import subprocess
 
-applescript = """
-tell application "Finder"
-    set myApp to POSIX file "<full_path_to_your_script>"
-    set myIcon to POSIX file "<full_path_to_your_icns_icon>"
-
-    set myAlias to myApp as alias
-    set myIconAlias to myIcon as alias
-
-    set icon of myAlias to myIconAlias
-end tell
-"""
-
-subprocess.run(['osascript', '-e', applescript])
 window = Tk()
 window.title("Calculator")
 
@@ -67,7 +53,18 @@ clear_btn.grid(row=5, column=2)
 display = Entry(window, justify=RIGHT)
 display.grid(row=0, column=0, columnspan=4)
 
-window.iconbitmap(default='image.icns')
+applescript = """
+tell application "Finder"
+    set myApp to POSIX file "/Users/asad/Desktop/Calculator/interface.py"
+    set myIcon to POSIX file "/Users/asad/Desktop/Calculator/image.icns"
+
+    set myAlias to myApp as alias
+    set myIconAlias to myIcon as alias
+
+    set icon of myAlias to myIconAlias
+end tell
+"""
+
+subprocess.run(['osascript', '-e', applescript])
 
 window.mainloop()
-
