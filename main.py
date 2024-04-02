@@ -1,54 +1,35 @@
-def add(a,b):
-    result = a + b
-    return result
+import tkinter as tk
 
-def subtract(a,b):
-    result = a - b
-    return result
+calculation = ''
 
-def multiply(a,b):
-    result = a * b
-    return result
 
-def divide(a,b):
-    if b!=0:
-        result = a / b
-        return result
-    else:
-        return "Error: Division by zero"    
+def add_to_calculation(symbol):
+    global calculation
+    calculation += str(symbol)
+    text_result.delete(1.0, 'end')
+    text_result.insert(1.0, calculation)
 
-def exponentiation(a,b):
-    result = a**b
-    return result
 
-def modulus(a, b):
-    if a > 0 and b > 0:
-        result = ((a/100)* b)
-        return result
-    else:
-        return "Error: Both numbers should be positive for modulus operation"
+def evaluate_calculation():
+    global calculation
+    try:
+        calculation = str(eval(calculation))
+        text_result.delete(1.0, 'end')
+        text_result.insert(1.0, calculation)
+    except:
+        clear_field()
+        text_result.insert(1.0, 'Error')
 
-def get_number(prompt):
-    while True:
-        try:
-            user_input = float(input(prompt))
-            return user_input
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-          
-def get_user_input():              
-    a = float(input("Enter the first number: "))
-    b = float(input("Enter the second number: "))
-    return a, b
 
-def display_results(a, b):
-    print(f"Addition: {add(a, b)}")
-    print(f"Subtraction: {subtract(a, b)}")
-    print(f"Multiplication: {multiply(a, b)}")
-    print(f"Division: {divide(a, b)}")
-    print(f"Exponentiation: {exponentiation(a, b)}")
-    print(f"Modulus: {modulus(a, b)}")
+def clear_field():
+    global calculation
+    calculation = ''
+    text_result.delete(1.0, 'end')
 
-if __name__ == "__main__":
-    a, b = get_user_input()
-    display_results(a, b)
+
+root = tk.TK()
+root.geometry('300x275')
+
+text_result = tk.Text(root, height=2, width=16, font=('Arial', 24))
+text_result.grid(columnspan=5)
+root.mainloop()
